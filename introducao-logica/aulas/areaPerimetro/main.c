@@ -10,7 +10,7 @@ int main(){
     area = base*height;
     per = (base*2)+(height*2);
 
-    printf("Area: %.2f\nPerímetro: %.2f", area, per);
+    printf("Area: %.2f\nPerimetro: %.2f", area, per);
 
     return 0;
 }
