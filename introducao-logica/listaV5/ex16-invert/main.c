@@ -1,16 +1,14 @@
 #include <stdio.h>
 
 int main(){
-    char num[10], numInv[10];
-    int i, j;
-    printf("Type a number with 3 digits: ");
-    scanf("%s", num);
-    j = 2;
-    for(i = 0; i<3; i++){
-        numInv[i] = num[j];
-        j--;
-        printf("%c --- %c\n", num[i], numInv[i]);
-    }
-
+    int num, numIn = 0, cen, dez, uni;
+    printf("Insira um numero de 3 algorismos: ");
+    scanf("%d", &num);
+    cen = num%10;
+    num/=10;
+    dez = num%10;
+    uni = num/10;
+    numIn =  cen*100+dez*10+uni;
+    printf("%d", numIn);
     return 0;
 }
