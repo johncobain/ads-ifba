@@ -1,24 +1,24 @@
 #include <stdio.h>
 
 int main(){
-    int num, i = 0;
-    int numBinary[100];
+    int num, d1,d2,d3,d4,d5;
+    int numBinary;
     printf("---------------------\n");
     printf("--DECIMAL-TO-BINARY--\n");
     printf("---------------------\n");
     printf("Type a number less than 32: ");
     scanf("%d",&num);
-    if(num < 32){
-        while(num >0){
-            numBinary[i] = num%2;
-            num = num/2;
-            i++;
-        }
-        for(int j = i -1; j >=0; j--){
-            printf("%d", numBinary[j]);
-        }
-    }else{
-        printf("Number is greater or equal to 32");
-    }
+    d1 = (num%2);
+    num/=2;
+    d2 = (num%2);
+    num/=2;
+    d3 = (num%2);
+    num/=2;
+    d4 = (num%2);
+    num/=2;
+    d5 = (num%2);
+    numBinary = d5*10000+d4*1000+d3*100+d2*10+d1;
+    
+    printf("%05d", numBinary);
     return 0;
 }
