@@ -12,11 +12,11 @@ int main(){
     int ex1,ex2,ex3,ex4,ex5;
     printf("Insira a nota das 5 provas: ");
     scanf("%d %d %d %d %d", &pr1,&pr2,&pr3,&pr4,&pr5);
-    ex1 = pr1>=70?1:0;
-    ex2 = pr2>=70?1:0;
-    ex3 = pr3>=70?1:0;
-    ex4 = pr4>=70?1:0;
-    ex5 = pr5>=70?1:0;
+    ex1 = pr1>=70;
+    ex2 = pr2>=70;
+    ex3 = pr3>=70;
+    ex4 = pr4>=70;
+    ex5 = pr5>=70;
     if(ex1&&ex2&&ex3&&ex4&&ex5){
         printf("NOTA A!");
     }else if(ex1&&ex2&&ex4&& !(ex3||ex5)){
