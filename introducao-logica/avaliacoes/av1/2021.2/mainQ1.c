@@ -11,29 +11,39 @@ decimal.*/
 int main(){
     int num3, t3,t2,t1,t0, num10;
     printf("Insira um numero de 4 trits:\\> "); scanf("%d", &num3);
-    t3 = num3/1000;
-    t2 = (num3%1000)/100;
-    t1 = (num3%100)/10;
-    t0 = num3%10;
+        t3 = num3/1000;
+        t2 = (num3%1000)/100;
+        t1 = (num3%100)/10;
+        t0 = num3%10;
+    if(num3<=999&&num3>99){
+        t3 = 1;
+    }else if(num3<=99&&num3>9){
+        t3 = 1;
+        t2 = 1;
+    }else if(num3<=9){
+        t3 = 1;
+        t2 = 1;
+        t1 = 1;
+    }
     switch(t0){
         case 2: t0=1;break;
         case 1: t0=0;break;
-        case 0: t0=-1;break; default: t0=0;
+        case 0: t0=-1;break;
     }
     switch(t1){
         case 2: t1=3;break;
         case 1: t1=0;break;
-        case 0: t1=-3;break; default: t1=0;
+        case 0: t1=-3;break;
     }
     switch(t2){
         case 2: t2=9;break;
         case 1: t2=0;break;
-        case 0: t2=-9;break; default: t2=0;
+        case 0: t2=-9;break;
     }
     switch(t3){
         case 2: t3=27;break;
         case 1: t3=0;break;
-        case 0: t3=-27;break; default: t3=0;
+        case 0: t3=-27;break;
     }
     num10 = t3+t2+t1+t0;
     printf("%04d em ternario balanceado eh igual a %d em decimal.",num3, num10);
