@@ -7,16 +7,50 @@ Escreva um programa em C, que leia um número de quatro dígitos do cartão e um
 #include <stdio.h>
 
 int main(){
-    int cart, hora, valorMa=0, valorMe=0, sub, d3,d2,d1,d0, cod;
+    int cart, hora, c3, c2, c1, c0, h3, h2, h1, h0;
+    int valorMa=0, valorMe=0, sub, d3,d2,d1,d0, cod;
     scanf("%d %d", &cart, &hora);
-    if(cart%10>hora%10){valorMa+=cart%10; valorMe+=hora%10;}
-    else{valorMa=hora%10; valorMe=cart%10;}
-    if((cart%100)/10>(hora%100)/10){valorMa+=((cart%100)/10)*10; valorMe+=((hora%100)/10)*10;}
-    else{valorMa+=((hora%100)/10)*10; valorMe+=((cart%100)/10)*10;}
-    if((cart%1000)/100>(hora%100)/100){valorMa+=((cart%1000)/100)*100; valorMe+=((hora%1000)/100)*100;}
-    else{valorMa+=((hora%1000)/100)*100; valorMe+=((cart%1000)/100)*100;}
-    if(cart/1000>hora/1000){valorMa+=(cart/1000)*1000;valorMe+=(hora/1000)*1000;}
-    else{valorMa+=(hora/1000)*1000; valorMe+= (cart/1000)*1000;}
+    c3 = cart/1000;
+    c2 = (cart%1000)/100;
+    c1 = (cart%100)/10;
+    c0 = cart%10;
+
+    h3 = hora/1000;
+    h2 = (hora%1000)/100;
+    h1 = (hora%100)/10;
+    h0 = hora%10;
+
+    if(c0>h0){
+        valorMa+=c0; 
+        valorMe+=h0;
+    }else{
+        valorMa=h0; 
+        valorMe=c0;
+    }
+
+    if(c1>h1){
+        valorMa+=(c1)*10; 
+        valorMe+=(h1)*10;
+    }else{
+        valorMa+=(h1)*10; 
+        valorMe+=(c1)*10;
+    }
+    
+    if(c2>h2){
+        valorMa+=(c2)*100; 
+        valorMe+=(h2)*100;
+    }else{
+        valorMa+=(h2)*100; 
+        valorMe+=(c2)*100;
+    }
+
+    if(c3>h3){
+        valorMa+=(c3)*1000;
+        valorMe+=(h3)*1000;
+    }else{
+        valorMa+=(h3)*1000; 
+        valorMe+= (c3)*1000;
+    }
     sub = valorMa - valorMe;
     d3 = sub/1000;
     d2 = (sub%1000)/100;
