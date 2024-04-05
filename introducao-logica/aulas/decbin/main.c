@@ -14,6 +14,6 @@ int main(){
         bin+= bit*base;
         base*=10;
     }
-    printf("(%d)10 = (%lld)2",dec, bin);
+    // printf("(%d)10 = (%lld)2",dec, bin); //saporra dando erro ai mas funciona
     return 0;
 }
