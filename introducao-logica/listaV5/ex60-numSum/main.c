@@ -6,12 +6,6 @@ dão o número par.*/
 #include <stdio.h>
 
 int main(){
-    int num, i, j ,prim1, prim2;
-    scanf("%d", &num);
-    if(num<=2 || num%2 != 0 || num<500 || num>1000){
-        printf("Numero invalido!");
-    }else{
-        
-    }
+    
     return 0;
 }
