@@ -10,7 +10,7 @@ int main(){
         scanf("%d", &arr[i]);
     }
 
-    for(int leap = 0; leap<QNT_N-1; leap++){
+    for(int leap = 0; leap<QNT_N; leap++){
         for(int i = 0; i<QNT_N-1; i++){
             if(arr[i]>arr[i+1]){
                 aux = arr[i+1];
