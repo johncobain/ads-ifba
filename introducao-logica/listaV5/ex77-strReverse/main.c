@@ -12,7 +12,7 @@ int main(){
         if(countC>=0){
         strRev[i]=str[countC];
         }else{
-            strRev[i] = '\0';
+            strRev[i] = '\0'; 
         }
     }
 
