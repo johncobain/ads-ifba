@@ -24,7 +24,7 @@ int main(){
         }else{
             index = mid;
         }
-    }while(arr[mid]!=num);
+    }while(arr[mid]!=num&&mid!=start&&mid!=end);
     printf("\nPosicao: %d", index);
     return 0;
 }
