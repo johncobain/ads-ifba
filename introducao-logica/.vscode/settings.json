@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cmath": "c"
     },
     "cSpell.language": "en,pt-BR",
     "cSpell.words": [
