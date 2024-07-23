@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define TAM 20
+#define TAM 200
 
 int main(){
     int serie[TAM];
