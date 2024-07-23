@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define QTD_EXP 6
+#define QTD_EXP 8
 
 int main(){
     int n=2, mers;
