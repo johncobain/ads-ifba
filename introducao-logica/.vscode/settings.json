@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "MAINq1.C": "cpp"
     },
     "cSpell.language": "en,pt-BR",
     "cSpell.words": [
