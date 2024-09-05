@@ -82,6 +82,5 @@ int main(void){
                 printf("Opcao invalida\n");
         }
     }
-
     return 0;
 }
