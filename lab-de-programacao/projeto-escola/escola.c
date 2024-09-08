@@ -69,7 +69,9 @@ int main(void){
                             printf("Lista vazia\n");
                         }else{
                             for(int i = 0; i < qtdAluno; i++){
-                                printf("Matricula: %d\n", listaAluno[i].matricula);
+                                if(listaAluno[i].ativo==1){
+                                    printf("Matricula: %d\n", listaAluno[i].matricula);
+                                }
                             }
                         }
                         break;
@@ -79,7 +81,32 @@ int main(void){
                         break;
                     case 4:
                         printf("4 - Excluir Aluno\n");
-
+                        printf("Digite a matricula: ");
+                        int matricula;
+                        int achou = 0;
+                        scanf("%d", &matricula);
+                        if(matricula<0){
+                        printf("Matricula invalida\n");
+                        }else{
+                            for(int i = 0; i < qtdAluno; i++){
+                                if(matricula== listaAluno[i].matricula){
+                                    listaAluno[i].ativo = -1;
+                                    achou = 1;
+                                    for(int j = i; j< qtdAluno-1; j++){
+                                        listaAluno[j].matricula = listaAluno[j+1].matricula;
+                                        listaAluno[j].sexo = listaAluno[j+1].sexo;
+                                        listaAluno[j].ativo = listaAluno[j+1].ativo;
+                                    }
+                                    qtdAluno--;
+                                    break;
+                                }
+                            }
+                            if(achou){
+                                printf("Aluno Excluido com Sucesso!\n");
+                            }else{
+                                printf("Matricula inexistente\n");
+                            }
+                        }
                         break;
                     default:
                         printf("Opcao invalida\n");
