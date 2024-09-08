@@ -17,6 +17,7 @@ int main(void){
 
     while(!sair){
         printf("Projeto Escola\n");
+        printf("-----------------------\n");
         printf("0 - Sair\n");
         printf("1 - Aluno\n");
         printf("2 - Professor\n");
@@ -33,6 +34,7 @@ int main(void){
                 int sairAluno = 0;
                 int opcaoAluno;
                 while(!sairAluno){
+                    printf("-----------------------\n");
                     printf("0 - Voltar\n");
                     printf("1 - Cadastrar Aluno\n");
                     printf("2 - Listar Aluno\n");
