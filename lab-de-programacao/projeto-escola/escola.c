@@ -1,9 +1,16 @@
 #include <stdio.h>
 #define TAM_ALUNO 3
 
+typedef struct alu{
+    int matricula;
+    char sexo;
+    int ativo;
+} Aluno;
+
+
 int main(void){
 
-    int listaAluno[TAM_ALUNO];
+    Aluno listaAluno[TAM_ALUNO];
     int opcao;
     int qtdAluno = 0;
     int sair = 0;
@@ -40,24 +47,31 @@ int main(void){
                         break;
                     case 1:
                         printf("1 - Cadastrar Aluno\n");
-                        printf("Digite a matricula\n");
-                        int matricula;
-                        scanf("%d", &matricula);
-                        if(matricula<0){
-                            printf("Matricula invalida\n");
+                        if(qtdAluno >= TAM_ALUNO){
+                            printf("Lista de alunos Cheia\n");
                         }else{
-                            if(qtdAluno >= TAM_ALUNO){
-                                printf("Lista de alunos Cheia");
+                            printf("Digite a matricula: ");
+                            int matricula;
+                            scanf("%d", &matricula);
+                            if(matricula<0){
+                            printf("Matricula invalida\n");
                             }else{
-                                listaAluno[qtdAluno] = matricula;
+                                listaAluno[qtdAluno].matricula = matricula;
+                                listaAluno[qtdAluno].ativo = 1;
                                 qtdAluno++;
+                                printf("Cadastrado com sucesso!\n");
                             }
                         }
-
                         break;
                     case 2:
                         printf("2 - Listar Aluno\n");
-
+                        if(qtdAluno==0){
+                            printf("Lista vazia\n");
+                        }else{
+                            for(int i = 0; i < qtdAluno; i++){
+                                printf("Matricula: %d\n", listaAluno[i].matricula);
+                            }
+                        }
                         break;
                     case 3:
                         printf("3 - Atualizar Aluno\n");
