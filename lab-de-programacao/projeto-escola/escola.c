@@ -1,12 +1,15 @@
 #include <stdio.h>
 #define TAM_ALUNO 3
 
+//protótipos das funções
+int menuGeral();
+int menuAluno();
+
 typedef struct alu{
     int matricula;
     char sexo;
     int ativo;
 } Aluno;
-
 
 int main(void){
 
@@ -16,14 +19,7 @@ int main(void){
     int sair = 0;
 
     while(!sair){
-        printf("Projeto Escola\n");
-        printf("-----------------------\n");
-        printf("0 - Sair\n");
-        printf("1 - Aluno\n");
-        printf("2 - Professor\n");
-        printf("3 - Disciplina\n");
-
-        scanf("%d", &opcao);
+        opcao = menuGeral();
 
         switch(opcao){
             case 0:
@@ -34,14 +30,9 @@ int main(void){
                 int sairAluno = 0;
                 int opcaoAluno;
                 while(!sairAluno){
-                    printf("-----------------------\n");
-                    printf("0 - Voltar\n");
-                    printf("1 - Cadastrar Aluno\n");
-                    printf("2 - Listar Aluno\n");
-                    printf("3 - Atualizar Aluno\n");
-                    printf("4 - Excluir Aluno\n");
-
-                    scanf("%d", &opcaoAluno);
+                    int matricula;
+                    int achou = 0;
+                    opcaoAluno = menuAluno();
 
                     switch(opcaoAluno){
                     case 0:
@@ -79,13 +70,33 @@ int main(void){
                         break;
                     case 3:
                         printf("3 - Atualizar Aluno\n");
-
+                        printf("Digite a matricula: ");
+                        achou = 0;
+                        scanf("%d", &matricula);
+                        if(matricula<0){
+                            printf("Matricula invalida\n");
+                        }else{
+                            for(int i = 0; i < qtdAluno; i++){
+                                if(matricula== listaAluno[i].matricula&&listaAluno[i].ativo==1){
+                                    printf("Digite a nova matricula: ");
+                                    int novaMatricula;
+                                    scanf("%d", &novaMatricula);
+                                    listaAluno[i].matricula = novaMatricula;
+                                    achou=1;
+                                    break;
+                                }
+                            }
+                            if(achou){
+                                printf("Aluno Atualizado com Sucesso!\n");
+                            }else{
+                                printf("Matricula inexistente\n");
+                            }
+                        }
                         break;
                     case 4:
                         printf("4 - Excluir Aluno\n");
                         printf("Digite a matricula: ");
-                        int matricula;
-                        int achou = 0;
+                        achou = 0;
                         scanf("%d", &matricula);
                         if(matricula<0){
                         printf("Matricula invalida\n");
@@ -126,4 +137,31 @@ int main(void){
         }
     }
     return 0;
+}
+
+// funções
+int menuGeral(){
+    int opcao;
+    printf("Projeto Escola\n");
+    printf("-----------------------\n");
+    printf("0 - Sair\n");
+    printf("1 - Aluno\n");
+    printf("2 - Professor\n");
+    printf("3 - Disciplina\n");
+    scanf("%d", &opcao);
+    
+    return opcao;
+}
+
+int menuAluno(){
+    int opcao;
+    printf("-----------------------\n");
+    printf("0 - Voltar\n");
+    printf("1 - Cadastrar Aluno\n");
+    printf("2 - Listar Aluno\n");
+    printf("3 - Atualizar Aluno\n");
+    printf("4 - Excluir Aluno\n");
+    scanf("%d", &opcao);
+
+    return opcao;
 }
