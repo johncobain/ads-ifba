@@ -44,13 +44,10 @@ int main(void){
                     case 0:sairAluno = 1;break;
                     case 1:{
                         int retorno=cadastrarAluno(listaAluno, qtdAluno);
-                        if(retorno == MATRICULA_INVALIDA){
-                            printf("Matricula invalida\n");
-                        }else if(retorno == CAD_ALUNO_SUCESSO){
-                            printf("Cadastrado com sucesso!\n");
-                            qtdAluno++;
-                        }else if(retorno == LISTA_CHEIA){
-                            printf("Lista de alunos Cheia\n");
+                        switch(retorno){
+                            case MATRICULA_INVALIDA: printf("Matricula invalida\n");break;
+                            case LISTA_CHEIA: printf("Lista de alunos Cheia\n"); break;
+                            case CAD_ALUNO_SUCESSO: printf("Cadastrado com sucesso!\n"); qtdAluno++; break;
                         }
                         break;
                         }
