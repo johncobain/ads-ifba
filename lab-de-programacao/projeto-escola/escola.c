@@ -6,6 +6,7 @@
 #define LISTA_CHEIA -3
 #define ATUALIZACAO_ALUNO_SUCESSO -4
 #define MATRICULA_INEXISTENTE -5
+#define EXCLUSAO_ALUNO_SUCESSO -6
 typedef struct alu{
     int matricula;
     char sexo;
@@ -18,6 +19,7 @@ int menuAluno();
 int cadastrarAluno(Aluno listaAluno[], int qtdAluno);
 void listarAluno(Aluno listaAluno[], int qtdAluno);
 int atualizarAluno(Aluno listaAluno[], int qtdAluno);
+int excluirAluno(Aluno listaAluno[], int qtdAluno);
 
 
 int main(void){
@@ -39,8 +41,6 @@ int main(void){
                 int sairAluno = 0;
                 int opcaoAluno;
                 while(!sairAluno){
-                    int matricula;
-                    int achou = 0;
                     opcaoAluno = menuAluno();
 
                     switch(opcaoAluno){
@@ -68,31 +68,11 @@ int main(void){
                         break;
                     }
                     case 4:{
-                        printf("4 - Excluir Aluno\n");
-                        printf("Digite a matricula: ");
-                        achou = 0;
-                        scanf("%d", &matricula);
-                        if(matricula<0){
-                        printf("Matricula invalida\n");
-                        }else{
-                            for(int i = 0; i < qtdAluno; i++){
-                                if(matricula== listaAluno[i].matricula){
-                                    listaAluno[i].ativo = -1;
-                                    achou = 1;
-                                    for(int j = i; j< qtdAluno-1; j++){
-                                        listaAluno[j].matricula = listaAluno[j+1].matricula;
-                                        listaAluno[j].sexo = listaAluno[j+1].sexo;
-                                        listaAluno[j].ativo = listaAluno[j+1].ativo;
-                                    }
-                                    qtdAluno--;
-                                    break;
-                                }
-                            }
-                            if(achou){
-                                printf("Aluno Excluido com Sucesso!\n");
-                            }else{
-                                printf("Matricula inexistente\n");
-                            }
+                        int retorno=excluirAluno(listaAluno, qtdAluno);
+                        switch(retorno){
+                            case MATRICULA_INVALIDA: printf("Matricula invalida\n");break;
+                            case MATRICULA_INEXISTENTE: printf("Matricula inexistente\n"); break;
+                            case EXCLUSAO_ALUNO_SUCESSO: printf("Aluno Excluido com Sucesso!\n");qtdAluno--; break;
                         }
                         break;
                     }
@@ -190,6 +170,31 @@ int atualizarAluno(Aluno listaAluno[], int qtdAluno){
         }
     }
     if(achou) return ATUALIZACAO_ALUNO_SUCESSO; 
+
+    return MATRICULA_INEXISTENTE;
+}
+
+int excluirAluno(Aluno listaAluno[], int qtdAluno){
+    printf("4 - Excluir Aluno\n");
+    printf("Digite a matricula: ");
+    int achou = 0;
+    int matricula;
+    scanf("%d", &matricula);
+    if(matricula<0) return MATRICULA_INVALIDA;
+
+    for(int i = 0; i < qtdAluno; i++){
+        if(matricula== listaAluno[i].matricula){
+            listaAluno[i].ativo = -1;
+            for(int j = i; j< qtdAluno-1; j++){
+                listaAluno[j].matricula = listaAluno[j+1].matricula;
+                listaAluno[j].sexo = listaAluno[j+1].sexo;
+                listaAluno[j].ativo = listaAluno[j+1].ativo;
+            }
+            achou = 1;
+            break;
+        }
+    }
+    if(achou) return EXCLUSAO_ALUNO_SUCESSO; 
 
     return MATRICULA_INEXISTENTE;
 }
