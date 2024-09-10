@@ -4,6 +4,8 @@
 #define CAD_ALUNO_SUCESSO -1
 #define MATRICULA_INVALIDA -2
 #define LISTA_CHEIA -3
+#define ATUALIZACAO_ALUNO_SUCESSO -4
+#define MATRICULA_INEXISTENTE -5
 typedef struct alu{
     int matricula;
     char sexo;
@@ -15,6 +17,7 @@ int menuGeral();
 int menuAluno();
 int cadastrarAluno(Aluno listaAluno[], int qtdAluno);
 void listarAluno(Aluno listaAluno[], int qtdAluno);
+int atualizarAluno(Aluno listaAluno[], int qtdAluno);
 
 
 int main(void){
@@ -56,28 +59,11 @@ int main(void){
                         break;
                     }
                     case 3:{
-                        printf("3 - Atualizar Aluno\n");
-                        printf("Digite a matricula: ");
-                        achou = 0;
-                        scanf("%d", &matricula);
-                        if(matricula<0){
-                            printf("Matricula invalida\n");
-                        }else{
-                            for(int i = 0; i < qtdAluno; i++){
-                                if(matricula== listaAluno[i].matricula&&listaAluno[i].ativo==1){
-                                    printf("Digite a nova matricula: ");
-                                    int novaMatricula;
-                                    scanf("%d", &novaMatricula);
-                                    listaAluno[i].matricula = novaMatricula;
-                                    achou=1;
-                                    break;
-                                }
-                            }
-                            if(achou){
-                                printf("Aluno Atualizado com Sucesso!\n");
-                            }else{
-                                printf("Matricula inexistente\n");
-                            }
+                        int retorno=atualizarAluno(listaAluno, qtdAluno);
+                        switch(retorno){
+                            case MATRICULA_INVALIDA: printf("Matricula invalida\n");break;
+                            case MATRICULA_INEXISTENTE: printf("Matricula inexistente\n"); break;
+                            case ATUALIZACAO_ALUNO_SUCESSO: printf("Aluno Atualizado com Sucesso!\n"); break;
                         }
                         break;
                     }
@@ -168,6 +154,8 @@ int cadastrarAluno(Aluno listaAluno[], int qtdAluno){
     listaAluno[qtdAluno].matricula = matricula;
     listaAluno[qtdAluno].ativo = 1;
     return CAD_ALUNO_SUCESSO;
+}
+
 void listarAluno(Aluno listaAluno[], int qtdAluno){
     printf("2 - Listar Aluno\n");
     if(qtdAluno==0){
@@ -181,4 +169,27 @@ void listarAluno(Aluno listaAluno[], int qtdAluno){
     }
 }
 
+int atualizarAluno(Aluno listaAluno[], int qtdAluno){
+    printf("3 - Atualizar Aluno\n");
+    printf("Digite a matricula: ");
+    int achou = 0;
+    int matricula;
+    scanf("%d", &matricula);
+    if(matricula<0) return MATRICULA_INVALIDA;
+
+    for(int i = 0; i < qtdAluno; i++){
+        if(matricula== listaAluno[i].matricula&&listaAluno[i].ativo==1){
+            printf("Digite a nova matricula: ");
+            int novaMatricula;
+            scanf("%d", &novaMatricula);
+            if(novaMatricula<0) return MATRICULA_INVALIDA;
+
+            listaAluno[i].matricula = novaMatricula;
+            achou=1;
+            break;
+        }
+    }
+    if(achou) return ATUALIZACAO_ALUNO_SUCESSO; 
+
+    return MATRICULA_INEXISTENTE;
 }
