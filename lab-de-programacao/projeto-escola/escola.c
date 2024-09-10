@@ -14,6 +14,7 @@ typedef struct alu{
 int menuGeral();
 int menuAluno();
 int cadastrarAluno(Aluno listaAluno[], int qtdAluno);
+void listarAluno(Aluno listaAluno[], int qtdAluno);
 
 
 int main(void){
@@ -54,16 +55,7 @@ int main(void){
                         break;
                         }
                     case 2:{
-                        printf("2 - Listar Aluno\n");
-                        if(qtdAluno==0){
-                            printf("Lista vazia\n");
-                        }else{
-                            for(int i = 0; i < qtdAluno; i++){
-                                if(listaAluno[i].ativo==1){
-                                    printf("Matricula: %d\n", listaAluno[i].matricula);
-                                }
-                            }
-                        }
+                        listarAluno(listaAluno, qtdAluno);
                         break;
                     }
                     case 3:{
@@ -179,4 +171,17 @@ int cadastrarAluno(Aluno listaAluno[], int qtdAluno){
     listaAluno[qtdAluno].matricula = matricula;
     listaAluno[qtdAluno].ativo = 1;
     return CAD_ALUNO_SUCESSO;
+void listarAluno(Aluno listaAluno[], int qtdAluno){
+    printf("2 - Listar Aluno\n");
+    if(qtdAluno==0){
+        printf("Lista vazia\n");
+    }else{
+        for(int i = 0; i < qtdAluno; i++){
+            if(listaAluno[i].ativo==1){
+                printf("Matricula: %d\n", listaAluno[i].matricula);
+            }
+        }
+    }
+}
+
 }
