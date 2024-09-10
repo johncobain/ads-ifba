@@ -1,15 +1,20 @@
 #include <stdio.h>
 #define TAM_ALUNO 3
 
-//protótipos das funções
-int menuGeral();
-int menuAluno();
-
+#define CAD_ALUNO_SUCESSO -1
+#define MATRICULA_INVALIDA -2
+#define LISTA_CHEIA -3
 typedef struct alu{
     int matricula;
     char sexo;
     int ativo;
 } Aluno;
+
+//protótipos das funções
+int menuGeral();
+int menuAluno();
+int cadastrarAluno(Aluno listaAluno[], int qtdAluno);
+
 
 int main(void){
 
@@ -35,28 +40,20 @@ int main(void){
                     opcaoAluno = menuAluno();
 
                     switch(opcaoAluno){
-                    case 0:
-                        sairAluno = 1;
-                        break;
-                    case 1:
-                        printf("1 - Cadastrar Aluno\n");
-                        if(qtdAluno >= TAM_ALUNO){
-                            printf("Lista de alunos Cheia\n");
-                        }else{
-                            printf("Digite a matricula: ");
-                            int matricula;
-                            scanf("%d", &matricula);
-                            if(matricula<0){
+                    case 0:sairAluno = 1;break;
+                    case 1:{
+                        int retorno=cadastrarAluno(listaAluno, qtdAluno);
+                        if(retorno == MATRICULA_INVALIDA){
                             printf("Matricula invalida\n");
-                            }else{
-                                listaAluno[qtdAluno].matricula = matricula;
-                                listaAluno[qtdAluno].ativo = 1;
-                                qtdAluno++;
-                                printf("Cadastrado com sucesso!\n");
-                            }
+                        }else if(retorno == CAD_ALUNO_SUCESSO){
+                            printf("Cadastrado com sucesso!\n");
+                            qtdAluno++;
+                        }else if(retorno == LISTA_CHEIA){
+                            printf("Lista de alunos Cheia\n");
                         }
                         break;
-                    case 2:
+                        }
+                    case 2:{
                         printf("2 - Listar Aluno\n");
                         if(qtdAluno==0){
                             printf("Lista vazia\n");
@@ -68,7 +65,8 @@ int main(void){
                             }
                         }
                         break;
-                    case 3:
+                    }
+                    case 3:{
                         printf("3 - Atualizar Aluno\n");
                         printf("Digite a matricula: ");
                         achou = 0;
@@ -93,7 +91,8 @@ int main(void){
                             }
                         }
                         break;
-                    case 4:
+                    }
+                    case 4:{
                         printf("4 - Excluir Aluno\n");
                         printf("Digite a matricula: ");
                         achou = 0;
@@ -121,8 +120,8 @@ int main(void){
                             }
                         }
                         break;
-                    default:
-                        printf("Opcao invalida\n");
+                    }
+                    default: printf("Opcao invalida\n");
                     }
                 }
                 break;
@@ -164,4 +163,20 @@ int menuAluno(){
     scanf("%d", &opcao);
 
     return opcao;
+}
+
+int cadastrarAluno(Aluno listaAluno[], int qtdAluno){
+    printf("1 - Cadastrar Aluno\n");
+
+    if(qtdAluno >= TAM_ALUNO) return LISTA_CHEIA;
+
+    printf("Digite a matricula: ");
+    int matricula;
+    scanf("%d", &matricula);
+
+    if(matricula<0) return MATRICULA_INVALIDA;
+
+    listaAluno[qtdAluno].matricula = matricula;
+    listaAluno[qtdAluno].ativo = 1;
+    return CAD_ALUNO_SUCESSO;
 }
