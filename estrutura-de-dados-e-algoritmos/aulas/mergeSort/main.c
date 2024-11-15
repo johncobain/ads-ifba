@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <limits.h>
 
+void print_array(char * type, int *A, int length){
+    printf("%s", type);
+    for(int i = 0; i < length; i++){
+        if(i<length-1)printf("%d, ",A[i]);
+        else printf("%d.", A[i]);
+    }
+    printf("\n");
+}
 void merge(int *A, int p, int q, int r){
     int n1 = q-p+1;
     int n2 = r-q;
@@ -36,17 +44,10 @@ void merge_sort(int *A, int p, int r){
         merge_sort(A,p,q);
         merge_sort(A,q+1,r);
         merge(A,p,q,r);
+        // print_array("Passo: ", A, 10);
     }
 }
 
-void print_array(char * type, int *A, int length){
-    printf("%s", type);
-    for(int i = 0; i < length; i++){
-        if(i<length-1)printf("%d, ",A[i]);
-        else printf("%d.", A[i]);
-    }
-    printf("\n");
-}
 
 int main(){
     int A[10] ={7,9,0,0,-1,2,4,5,1,1};
