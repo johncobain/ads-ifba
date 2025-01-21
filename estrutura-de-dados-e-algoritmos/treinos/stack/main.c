@@ -6,7 +6,7 @@ typedef struct no{
     struct no *next;    
 }No;
 
-No* push(No *top, int val);
+int push(No **top, int val);
 int pop(No**top);
 void printStack(No*top);
 
@@ -22,7 +22,7 @@ int main(){
             int val;
             printf("Digite o valor :\\> ");
             scanf("%d", &val);
-            top = push(top, val);
+            push(&top, val);
             break;
         case 2:
             
@@ -41,13 +41,14 @@ int main(){
     return 0;
 }
 
-No *push(No *top, int val){
+int push(No **top, int val){
     No *newNode = malloc(sizeof(No)); 
     if(newNode){
         newNode->val = val;
-        newNode->next = top;
-        return newNode;
-    }else return NULL;
+        newNode->next = *top;
+        *top = newNode;
+        return 1;
+    }else return 0;
 }
 int pop(No**top);
 
