@@ -25,7 +25,8 @@ int main(){
             push(&top, val);
             break;
         case 2:
-            
+            int ret = pop(&top);
+            printf("%d", ret);
             break;
         case 3:
             printStack(top);
@@ -50,7 +51,13 @@ int push(No **top, int val){
         return 1;
     }else return 0;
 }
-int pop(No**top);
+int pop(No**top){
+    No *remove = *top;
+    *top = remove->next;
+    int retVal = remove->val;
+    free(remove);
+    return retVal;
+}
 
 void printStack(No*top){
     No *temp = top;
