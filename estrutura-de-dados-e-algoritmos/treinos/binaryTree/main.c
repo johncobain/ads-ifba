@@ -51,6 +51,30 @@ void inorder_traversal(Node *root){
   }
 }
 
+void pre_order(Node *root){
+  if(root){
+    printf("%d\n", root->data);
+    pre_order(root->left);
+    pre_order(root->right);
+  }
+}
+
+void post_order(Node *root){
+  if(root){
+    post_order(root->left);
+    post_order(root->right);
+    printf("%d\n", root->data);
+  }
+}
+
+void inorder_dec(Node *root){
+  if(root){
+    inorder_dec(root->right);
+    printf("%d\n", root->data);
+    inorder_dec(root->left);
+  }
+}
+
 int search(Node *root, int data){
   if(root == NULL) return NULL;
   
@@ -75,6 +99,12 @@ int main(){
 
   printf("\nInorder traversal:\n");
   inorder_traversal(root);
+  printf("\nPreorder:\n");
+  pre_order(root);
+  printf("\nPostorder:\n");
+  post_order(root);
+  printf("\nInorder Dec:\n");
+  inorder_dec(root);
 
   int temp = search(root, 88);
   if(temp != NULL){
