@@ -51,11 +51,14 @@ void inorder_traversal(Node *root){
   }
 }
 
-void pre_order(Node *root){
+void pre_order(Node *root, int *qtdLeafs){
   if(root){
     printf("%d\n", root->data);
-    pre_order(root->left);
-    pre_order(root->right);
+    pre_order(root->left, qtdLeafs);
+    pre_order(root->right, qtdLeafs);;
+    if(root->left == NULL && root->right == NULL){
+      *qtdLeafs = *qtdLeafs + 1;
+    }
   }
 }
 
@@ -91,6 +94,7 @@ int main(){
   {34, 84, 15, 0, 2, 99, 79, 9, 88, 18, 31, 39, 100, 101};
 
   Node *root = NULL;
+  int qtdLeafs = 0;
 
   for(i=0; i< 14; i++){
     root = insert(root, array[i]);
@@ -100,7 +104,8 @@ int main(){
   printf("\nInorder traversal:\n");
   inorder_traversal(root);
   printf("\nPreorder:\n");
-  pre_order(root);
+  pre_order(root , &qtdLeafs);
+  printf("Qtd Leafs: %d\n", qtdLeafs);
   printf("\nPostorder:\n");
   post_order(root);
   printf("\nInorder Dec:\n");
