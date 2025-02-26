@@ -9,20 +9,8 @@ typedef struct Node{
   int hight;
 } Node;
 
-Node *newNode(int data);
-Node *insert(Node *root, int data); 
-Node *remove(Node *root, int data);
-Node *balance(Node *root);
-Node *rightRotation(Node *root);
-Node *leftRotation(Node *root);
-Node *leftRightRotation(Node *root);
-Node *rightLeftRotation(Node *root);
-int hight(Node *root);
-int biggerHight(Node *root);
-int balanceFactor(Node *root);
-
 Node *newNode(int data){
-  Node *new = (Node*)malloc(sizeof(Node));
+  Node *new = malloc(sizeof(Node));
   if(new){
     new->data = data;
     new->left = NULL;
@@ -30,17 +18,87 @@ Node *newNode(int data){
     new->hight = 0;
   }else{
     printf("Memory allocation error\n");
-    exit(1);
   }
 
   return new;
 }
 
-Node *insert(Node *root, int data){
-  Node *temp = newNode(data);
+int biggerHight(int a, int b){
+  return (a > b) ? a : b;
+}
 
+int hight(Node *root){
+  if(root == NULL) return -1;
+  return root->hight;
+}
+
+int balanceFactor(Node *root){
+  if(root == NULL) return 0;
+
+  return hight(root->left) - hight(root->right);
+}
+
+
+Node*  rightRotation(Node *root){
+  printf("Right Rotation\n");
+  Node *l, *r;
+  l = root->left;
+  r = root->right;
+
+  l->right = root;
+  root->left = r;
+
+  root->hight = biggerHight(hight(root->left), hight(root->right))+1;
+  l->hight = biggerHight(hight(l->left), hight(l->right))+1;
+
+  return l;
+}
+
+Node* leftRotation(Node *root){
+  printf("Left Rotation\n");
+  Node *l, *r;
+  r = root->right;
+  l = root->left;
+
+  r->left = root;
+  root->right = l;
+
+  root->hight = biggerHight(hight(root->left), hight(root->right))+1;
+  r->hight = biggerHight(hight(r->left), hight(r->right))+1;
+
+  return r;
+}
+
+Node* leftRightRotation(Node *root){
+  root->left = leftRotation(root->left);
+  return rightRotation(root);
+}
+
+Node* rightLeftRotation(Node *root){
+  root->right = rightRotation(root->right);
+  return leftRotation(root);  
+}
+
+
+Node* balance(Node *root){
+  int bf = balanceFactor(root);
+
+  if(bf< -1 && balanceFactor(root->right) <= 0){
+    root = leftRotation(root);
+  }else if(bf > 1 && balanceFactor(root->left) >= 0){
+    root = rightRotation(root);
+  }else if(bf > 1 && balanceFactor(root->left) < 0){
+    root = leftRightRotation(root);
+  }else if(bf < -1 && balanceFactor(root->right) > 0){
+    root = rightLeftRotation(root);
+  }
+    
+  return root;
+}
+
+Node *insert(Node *root, int data){
   if(root == NULL){
-    return temp;
+    return newNode(data);
   }else{
     if(data < root->data){
       root->left = insert(root->left, data);
@@ -49,51 +107,71 @@ Node *insert(Node *root, int data){
     }
   }
 
-  root->hight = biggerHight(root)+1;
+  root->hight = biggerHight(hight(root->left), hight(root->right))+1;
 
   root = balance(root);
 
   return root;
 }
 
-Node *remove(Node *root, int data){
-  if(root == NULL) return NULL;
-  if(root->data == data){
-    if(root->left == NULL && root->right == NULL){
-      free(root);
-      return NULL;
-    }else if(root->left != NULL && root->right != NULL){
-      Node *temp = root->right;
-      while(temp->left != NULL){
-        temp = temp->left;
-      }
-      root->data = temp->data;
-      temp->data = data;
-      root->right = remove(root->right, data);
-      return root;
-    }else{
-      Node *temp;
-      if(root->left != NULL){
-        temp = root->left;
-      }else{
-        temp = root->right;
-      }
-      free(root);
-      return temp;
-    }
+
+Node *removeNo(Node *root, int data){
+  if(root == NULL) {
+    return NULL;
   }else{
-    if(data < root->data){
-      root->left = remove(root->left, data);
+    if(root->data == data){
+      if(root->left == NULL && root->right == NULL){
+        free(root);
+        return NULL;
+      }else {
+        if(root->left != NULL && root->right != NULL){
+        Node *temp = root->right;
+        while(temp->left != NULL){
+          temp = temp->left;
+        }
+        root->data = temp->data;
+        temp->data = data;
+        root->right = removeNo(root->right, data);
+        return root;
+        }else{
+          Node *temp;
+          if(root->left != NULL){
+            temp = root->left;
+          }else{
+            temp = root->right;
+          }
+          free(root);
+          return temp;
+        }
+      }
     }else{
-      root->right = remove(root->right, data);
+      if(data < root->data){
+        root->left = removeNo(root->left, data);
+      }else{
+        root->right = removeNo(root->right, data);
+      }
     }
   }
 
-  root->hight = biggerHight(root)+1;
+  root->hight = biggerHight(hight(root->left), hight(root->right))+1;
 
   root = balance(root);
 
   return root;
+}
+
+void printTree(Node *root, int level){
+  int i;
+  if(root){
+    printTree(root->right, level+1);
+    printf("\n\n");
+
+    for(i=0; i< level; i++){
+      printf("\t");
+    }
+    printf("%d\n", root->data);
+    printTree(root->left, level+1);
+  }
 }
 
 void inorder_traversal(Node *root){
@@ -131,76 +209,6 @@ void inorder_dec(Node *root){
   }
 }
 
-int hight(Node *root){
-  if(root == NULL) return -1;
-  return root->hight;
-}
-
-int biggerHight(Node *root){
-  return (root->left->hight > root->right->hight) ? root->left->hight : root->right->hight;
-}
-
-int balanceFactor(Node *root){
-  if(root == NULL) return 0;
-
-  return hight(root->left) - hight(root->right);
-}
-
-Node*  rightRotation(Node *root){
-  printf("Right Rotation\n");
-  Node *l, *r;
-  l = root->left;
-  r = root->right;
-
-  l->right = root;
-  root->left = r;
-
-  root->hight = biggerHight(root)+1;
-  l->hight = biggerHight(l)+1;
-
-  return l;
-}
-
-Node* leftRotation(Node *root){
-  printf("Left Rotation\n");
-  Node *l, *r;
-  r = root->right;
-  l = root->left;
-
-  r->left = root;
-  root->right = l;
-
-  root->hight = biggerHight(root)+1;
-  r->hight = biggerHight(r)+1;
-
-  return r;
-}
-
-Node* leftRightRotation(Node *root){
-  root->left = leftRotation(root->left);
-  return rightRotation(root);
-}
-
-Node* rightLeftRotation(Node *root){
-  root->right = rightRotation(root->right);
-  return leftRotation(root);  
-}
-
-Node* balance(Node *root){
-  int bf = balanceFactor(root);
-
-  if(bf< -1 && balanceFactor(root->right) <= 0){
-    root = leftRotation(root);
-  }else if(bf > 1 && balanceFactor(root->left) >= 0){
-    root = rightRotation(root);
-  }else if(bf > 1 && balanceFactor(root->left) < 0){
-    root = leftRightRotation(root);
-  }else if(bf < -1 && balanceFactor(root->right) > 0){
-    root = rightLeftRotation(root);
-  }
-    
-  return root;
-}
 
 int search(Node *root, int data){
   if(root == NULL) return NULL;
@@ -213,36 +221,31 @@ int search(Node *root, int data){
 }
 
 int main(){
-  int i;
-  int array[14] = 
-  {34, 84, 95, 100, 102, 99, 79, 9, 88, 18, 31, 39, 100, 101};
-
+  int opt, val;
   Node *root = NULL;
-  int qtdLeafs = 0;
 
-  for(i=0; i< 14; i++){
-    root = insert(root, array[i]);
-    printf("\nInserted %d\n", array[i]);
-    printf("Balance Factor: %d\n", balanceFactor(root));
-    printf("Root: %d\n", root->data);
-    printf("Hight: %d\n", hight(root));
-  }
-  printf("\nInorder traversal:\n");
-  inorder_traversal(root);
-  printf("\nPreorder:\n");
-  pre_order(root , &qtdLeafs);
-  printf("Qtd Leafs: %d\n", qtdLeafs);
-  printf("\nPostorder:\n");
-  post_order(root);
-  printf("\nInorder Dec:\n");
-  inorder_dec(root);
+  do{
+    printf("\n\n\t0 - Sair\n\t1 - Inserir\n\t2 - Remover\n\t3 - Imprimir\n");
+    scanf("%d", &opt);
+    switch (opt){
+    case 1:
+      printf("Digite o valor :\\> ");
+      scanf("%d", &val);
+      root = insert(root, val);
+      break;
+    case 2:
+      printf("Digite o valor :\\> ");
+      scanf("%d", &val);
+      root = removeNo(root, val);
+      break;
+    case 3:
+      printTree(root, 0);
+      break;
+    default:
+      break;
+    }
 
-  int temp = search(root, 88);
-  if(temp != NULL){
-    printf("Found %d\n", temp);
-  }else{
-    printf("Not found\n");
-  }
+  }while(opt != 0);
 
   return 0;
 }
