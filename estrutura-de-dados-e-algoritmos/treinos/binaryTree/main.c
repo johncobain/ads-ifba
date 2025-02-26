@@ -209,6 +209,18 @@ void inorder_dec(Node *root){
   }
 }
 
+int qtdLeafs(Node *root){
+  if(root == NULL){
+    return 0; // Árvore vazia ou subárvore inexistente, não há folhas
+  }
+  else if(root->left == NULL && root->right == NULL){
+    return 1; // Nó folha encontrado
+  }
+  else{
+    return qtdLeafs(root->left) + qtdLeafs(root->right); // Soma os nós folha das subárvores esquerda e direita
+  }
+}
+
 
 int search(Node *root, int data){
   if(root == NULL) return NULL;
