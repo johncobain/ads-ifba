@@ -1,0 +1,10 @@
+0 1 1 2 2 2 3 4 max 15 alt 4 pred 11
+0 1 2 3 2 1 max 7 alt 2 pred 6
+0 1 2 3 4 5 max 15 alt 5 pred 11
+0 1 2 3 max 7 alt 2 pred 6
+0 1 2 3 max 11 alt 3 pred 10
+0 1 2 3 4 5 6 max 7 alt 6 pred 6
+0 1 1 2 3 4 5 6 7 8 9 10 11 12 max 200 alt 12 pred 100
+0 max 200 alt 0 pred NaN
+0 max -1 alt 0 pred NaN
+0 max 30 alt 0 pred NaN
