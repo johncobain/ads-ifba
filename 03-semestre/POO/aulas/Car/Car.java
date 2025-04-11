@@ -2,19 +2,25 @@ public class Car {
     private String brand;
     private int year;
     private int fuel;
-
-    public Car(String brand){
-        this.brand = brand;
+    
+    public Car(){
+        System.out.println("The car has been created.");
     }
-
+    public Car(String brand, int year, int fuel) {
+        setBrand(brand);
+        setYear(year);
+        setFuel(fuel);
+        System.out.println("The car has been created and initialized.");
+    }
+    
     public String getBrand() {
         return brand;
     }
-
+    
     public void setBrand(String brand) {
         this.brand = brand;
     }
-
+    
     public int getYear() {
         return year;
     }
