@@ -1,3 +1,5 @@
+package br.edu.ifba.inf008;
+
 public class Car {
     private String brand;
     private int year;
@@ -7,9 +9,9 @@ public class Car {
         System.out.println("The car has been created.");
     }
     public Car(String brand, int year, int fuel) {
-        setBrand(brand);
-        setYear(year);
-        setFuel(fuel);
+        this.brand = brand;
+        this.year = year;
+        this.fuel = fuel;
         System.out.println("The car has been created and initialized.");
     }
     

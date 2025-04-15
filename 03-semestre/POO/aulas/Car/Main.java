@@ -1,3 +1,5 @@
+import br.edu.ifba.inf008.Car;
+
 public class Main {
     public static void main(String[] args) {
         Car car1 = new Car("BMW", 2020, 0);
