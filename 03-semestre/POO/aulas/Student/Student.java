@@ -2,7 +2,8 @@ class Student extends Person{
 
   private static int studentCount;
 
-  public Student(){
+  public Student(String name){
+    super(name);
     setId(studentCount++);
   }
 

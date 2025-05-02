@@ -4,6 +4,10 @@ class Person{
   private String address;
   private int id;
 
+  public Person(String name){
+    this.name = name;
+  }
+
   public void setName(String name) {
     this.name = name;
   }

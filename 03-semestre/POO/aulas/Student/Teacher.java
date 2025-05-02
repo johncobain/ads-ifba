@@ -4,7 +4,8 @@ class Teacher extends Person {
 
   private static int teacherCount;
 
-  public Teacher() {
+  public Teacher(String name) {
+    super(name);
     setId(teacherCount++);
   }
   public void setSubject(String subject) {

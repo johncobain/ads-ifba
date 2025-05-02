@@ -21,8 +21,7 @@ public class Main{
         case "1" -> {
           for(int i = 0; i < students.length; i++){
             if(students[i] == null){
-              students[i] = new Student();
-              students[i].setName(System.console().readLine("Enter the name: "));
+              students[i] = new Student(System.console().readLine("Enter the name: "));
               students[i].setAge( Integer.parseInt(System.console().readLine("Enter the age: ")));
               students[i].setAddress(System.console().readLine("Enter the address: ")); 
               System.out.print("\033[H\033[2J");
@@ -46,8 +45,7 @@ public class Main{
           case "3" -> {
             for(int i = 0; i < teachers.length; i++){
               if(teachers[i] == null){
-                teachers[i] = new Teacher();
-                teachers[i].setName(System.console().readLine("Enter the name: "));
+                teachers[i] = new Teacher(System.console().readLine("Enter the name: "));
                 teachers[i].setAge(Integer.parseInt(System.console().readLine("Enter the age: ")));
                 teachers[i].setAddress(System.console().readLine("Enter the address: "));
                 teachers[i].setSubject(System.console().readLine("Enter the subject: "));
