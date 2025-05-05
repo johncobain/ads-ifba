@@ -19,13 +19,14 @@ public class Main {
         System.out.println("0. Exit");
         System.out.print("Enter your choice: ");
         choice = scanner.nextInt();
+        scanner.nextLine();
 
         switch (choice){
           case 1 -> {
               System.out.print("Enter Car Plate: ");
-              String carPlate = scanner.next();
+              String carPlate = scanner.nextLine();
               System.out.print("Enter Car Model: ");
-              String carModel = scanner.next();
+              String carModel = scanner.nextLine();
               System.out.print("Enter Car Year(0 to default): ");
               int carYear = scanner.nextInt();
               System.out.print("Enter Number of Doors(0 to default): ");
@@ -50,9 +51,9 @@ public class Main {
             }
           case 2 -> {
               System.out.print("Enter Motorcycle Plate: ");
-              String motorcyclePlate = scanner.next();
+              String motorcyclePlate = scanner.nextLine();
               System.out.print("Enter Motorcycle Model: ");
-              String motorcycleModel = scanner.next();
+              String motorcycleModel = scanner.nextLine();
               System.out.print("Enter Motorcycle Year(0 to default): ");
               int motorcycleYear = scanner.nextInt();
               System.out.print("Enter CC(0 to default): ");
@@ -76,7 +77,7 @@ public class Main {
             }
           case 3 -> {
               System.out.print("Enter the plate of the vehicle to remove: ");
-              String plateToRemove = scanner.next();
+              String plateToRemove = scanner.nextLine();
               rental.removeVehicle(plateToRemove);
             }
           case 4 -> {
