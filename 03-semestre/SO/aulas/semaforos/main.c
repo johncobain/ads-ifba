@@ -48,7 +48,7 @@ void* increment_counter_safe(void* arg) {
 
 pthread_t threads[NUM_THREADS];
 
-int main (char *argc, int argv) {
+int main () {
   int i;
   pthread_mutex_init(&counter_mutex, NULL);
   for (i = 0; i < NUM_THREADS; i++) {
