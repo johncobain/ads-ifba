@@ -1,7 +1,7 @@
 package br.edu.ifba.inf0008.uniEvents.model.events;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import br.edu.ifba.inf0008.uniEvents.model.participants.Participant;
 
@@ -12,7 +12,7 @@ public abstract class Event {
   private LocalDate date;
   private int capacity;
   private Modality modality;
-  private HashMap<String, Participant> participants;
+  private ArrayList<Participant> participants;
   
   public Event(String name, String description, String location, LocalDate date, int capacity, Modality modality) {
     this.name = name;
@@ -21,6 +21,6 @@ public abstract class Event {
     this.date = date;
     this.capacity = capacity;
     this.modality = modality;
-    this.participants = new HashMap<>();
+    this.participants = new ArrayList<>();
   }
 }
