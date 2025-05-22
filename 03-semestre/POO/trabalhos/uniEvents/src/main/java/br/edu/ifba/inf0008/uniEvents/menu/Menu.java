@@ -12,9 +12,8 @@ public abstract class Menu implements IMenu {
   public Menu(String title){
     this.title = title;
   }
-  
-  @Override
-  public int show(List<String> options){
+
+  protected int showResponse(List<String> options){
     try (Scanner scanner = new Scanner(System.in)) {
       do { 
         System.out.println(Lines.doubleLine());
