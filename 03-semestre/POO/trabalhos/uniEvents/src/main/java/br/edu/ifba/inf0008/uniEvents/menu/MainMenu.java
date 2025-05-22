@@ -13,6 +13,7 @@ public class MainMenu extends Menu{
     options.add("Exit");
     options.add("Events Management");
     options.add("Participants Management");
+    options.add("See Reports");
   }
   
   @Override
