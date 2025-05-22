@@ -1,22 +1,22 @@
 package br.edu.ifba.inf0008.uniEvents.model.events;
 
 public enum Modality {
-  PRESENCIAL("Presencial"){
+  INPERSON("In Person"){
     @Override
     public String getInstructions() {
-      return "Instruções para o evento presencial: Verifique o endereço, o horário do evento e apresente o comprovante.";
+      return "Instructions for the in-person event: Check the address, the event time, and present the proof.";
     }
   },
   ONLINE("Online"){
     @Override
     public String getInstructions() {
-      return "Instruções para o evento online: Verifique o link de acesso, o horário do evento e insira o código de acesso.";
+      return "Instructions for the online event: Check the access link, the event time, and enter the access code.";
     }
   },
-  HIBRIDO("Híbrido (Online e Presencial)"){
+  HYBRID("Hybrid (In-Person and Online)"){
     @Override
     public String getInstructions() {
-      return "Instruções para o evento híbrido: Verifique o endereço físico ou virtual, o horário do evento e apresente o comprovante ou o código de acesso.";
+      return "Instructions for the hybrid event: Check the physical or virtual address, the event time, and present the proof or access code.";
     }
   };
 
