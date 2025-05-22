@@ -8,17 +8,25 @@ import br.edu.ifba.inf0008.uniEvents.utils.Lines;
 
 public abstract class Menu implements IMenu {
   protected String title;
+  protected String color;
 
   public Menu(String title){
     this.title = title;
   }
 
-  protected int showResponse(List<String> options){
+  public Menu(String title, String color){
+    this.title = title;
+    this.color = color;
+  }
+
+  protected int menuResponse(List<String> options){
     try (Scanner scanner = new Scanner(System.in)) {
       do { 
         System.out.println(Lines.doubleLine());
-        System.out.println(Lines.titleLine(title));
+        if(color != null) System.out.println(Lines.titleLine(title, color));
+        else System.out.println(Lines.titleLine(title));
         System.out.println(Lines.doubleLine());
+
         for(int i = 0; i < options.size(); i++){
           System.out.println(Lines.leftText("" + i + " - " + options.get(i)));
         }

@@ -31,6 +31,22 @@ public class Lines {
     return finalLine;
   }
 
+  public static String titleLine(String title, String color){
+    int totalLenght = 62 - title.length();
+    int leftPadding = totalLenght/2;
+    int rightPadding = totalLenght - leftPadding;
+    String finalLine = "|";
+    for(int i =0; i<leftPadding; i++){
+      finalLine = finalLine + " ";
+    }
+    finalLine = finalLine + color + title + Colors.RESET;
+    for(int i =0; i<rightPadding; i++){
+      finalLine = finalLine + " ";
+    }
+    finalLine = finalLine + "|";
+    return finalLine;
+  }
+
   public static String leftText(String text){
     int totalLenght = 62 - text.length();
     String finalLine = "|";
@@ -62,6 +78,38 @@ public class Lines {
       finalLine = finalLine + " ";
     }
     finalLine = finalLine + Colors.RED_BOLD + text + Colors.RESET;
+    for(int i =0; i<rightPadding; i++){
+      finalLine = finalLine + " ";
+    }
+    finalLine = finalLine + "|";
+    return finalLine;
+  }
+
+  public static String successLine(String text){
+    int totalLenght = 62 - text.length();
+    int leftPadding = totalLenght/2;
+    int rightPadding = totalLenght - leftPadding;
+    String finalLine = "|";
+    for(int i =0; i<leftPadding; i++){
+      finalLine = finalLine + " ";
+    }
+    finalLine = finalLine + Colors.GREEN_BOLD + text + Colors.RESET;
+    for(int i =0; i<rightPadding; i++){
+      finalLine = finalLine + " ";
+    }
+    finalLine = finalLine + "|";
+    return finalLine;
+  }
+
+  public static String warningLine(String text){
+    int totalLenght = 62 - text.length();
+    int leftPadding = totalLenght/2;
+    int rightPadding = totalLenght - leftPadding;
+    String finalLine = "|";
+    for(int i =0; i<leftPadding; i++){
+      finalLine = finalLine + " ";
+    }
+    finalLine = finalLine + Colors.YELLOW_BOLD + text + Colors.RESET;
     for(int i =0; i<rightPadding; i++){
       finalLine = finalLine + " ";
     }
