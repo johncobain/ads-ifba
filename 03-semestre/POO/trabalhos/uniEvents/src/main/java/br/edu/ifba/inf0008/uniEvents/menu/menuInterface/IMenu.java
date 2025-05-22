@@ -1,8 +1,10 @@
 package br.edu.ifba.inf0008.uniEvents.menu.menuInterface;
 
+import java.util.List;
+
 public interface IMenu {
   
-  void show();
+  int show(List<String> options);
   
-  void processOption(int option);
+  int processOption(String option);
 }
