@@ -1,0 +1,13 @@
+Maria Cristina Silva Pereira	745.998.332-01	19/07/1988	Rua dos Pintassilgos, 325	Imbuí	Salvador	Bahia	40.789-325
+João da Silva Ferreira	621.478.745-20	15/02/1970	Rua dos Pintassilgos, 325	Imbuí	Salvador	Bahia	40.789-325
+Rogério Dourado Junior	985.447.336-12	20/04/1998	Rua dos Pintassilgos, 325	Imbuí	Salvador	Bahia	40.789-325
+Fábio Conceição Fortes	744.669.658-30	01/07/2000	Rua dos Pintassilgos, 325	Imbuí	Salvador	Bahia	40.789-325
+Paula Catarina do Amaral	441.365.221-45	13/03/1995	Rua dos Pintassilgos, 325	Imbuí	Salvador	Bahia	40.789-325
+Elizabete Lima e Araújo	695.998.332-44	12/11/1988	Avenida Sete e Setembro 1245	Campo Grande	Salvador	Bahia	40.789-325
+Aline Maria Correia Paz	554.778.363-19	08/12/1993	Alamea do Bosque, 475	Pernambués	Salvador	Bahia	40.789-325
+Christina Gonçalves Pinto	478.894.367-00	19/10/1990	Rua Euzebio de Queiroz, 35	Liberdade	Salvador	Bahia	40.789-325
+Carolina Andrade Pires	295.321.447-85	14/05/1986	Avenida Milton Santos, s/n	Ondina	Salvador	Bahia	40.789-325
+Paula Regina Santos Amaral	441.365.221-45	24/06/1995	Rua Emidio Santos 54, Edf. Torre do Lanat apto 001	Barbalho	Salvador	Bahia	40.789-325
+Epifanio Pontes	364.569.221-90	03/02/1979	Avenida Princesa Isabel, 2075, Edf. Barcelona apto 201	Barra	Salvador	Bahia	40.789-325
+Antonio Igor Carvalho Queiroz	295.998.776-85	11/01/1958	Avenida Dorival Caymmi, s/n Edf. Catarina, apto 1102	Itapuã	Salvador	Bahia	40.789-325
+Anderson Batista Filho	445.987.632-50	19/05/1964	Rua das Araras 1524	Imbuí	Salvador	Bahia	40.789-325
