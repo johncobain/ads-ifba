@@ -2,12 +2,11 @@ package pweb.api.Blog.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pweb.api.Blog.exception.UserNotFoundException;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.service.UserService;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -24,12 +23,10 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Long id){
+    public ResponseEntity<User> getOne(@PathVariable Long id){
         User user = userService.getOne(id);
         if(user == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "User not found");
-            return ResponseEntity.status(404).body(error);
+            throw new UserNotFoundException(id);
         }
         return ResponseEntity.ok(user);
     }
@@ -40,12 +37,10 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody User user){
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
         User updatedUser = userService.getOne(id);
         if(updatedUser == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "User not found");
-            return ResponseEntity.status(404).body(error);
+            throw new UserNotFoundException(id);
         }
         return ResponseEntity.ok(userService.update(id, user));
     }
@@ -54,9 +49,7 @@ public class UserController {
     public ResponseEntity<?> delete(@PathVariable Long id){
         User user = userService.getOne(id);
         if(user == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "User not found");
-            return ResponseEntity.status(404).body(error);
+            throw new UserNotFoundException(id);
         }
         userService.delete(id);
         return ResponseEntity.status(204).build();

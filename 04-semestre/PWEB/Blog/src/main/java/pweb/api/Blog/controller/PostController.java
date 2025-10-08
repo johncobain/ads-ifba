@@ -3,6 +3,8 @@ package pweb.api.Blog.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pweb.api.Blog.dto.PostDto;
+import pweb.api.Blog.exception.PostNotFoundException;
+import pweb.api.Blog.exception.UserNotFoundException;
 import pweb.api.Blog.model.Post;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.service.PostService;
@@ -30,53 +32,43 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Long id){
+    public ResponseEntity<PostDto> getOne(@PathVariable Long id){
         PostDto post = postService.getOne(id);
         if(post == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "Post not found");
-            return ResponseEntity.status(404).body(error);
+            throw new PostNotFoundException(id);
         }
         return ResponseEntity.ok(post);
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Post post){
+    public ResponseEntity<PostDto> create(@RequestBody Post post){
         User user = userService.getOne(post.getUser().getId());
         if(user == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "User not found");
-            return ResponseEntity.status(404).body(error);
+            throw new UserNotFoundException(post.getUser().getId());
         }
         post.setUser(user);
         return ResponseEntity.ok(postService.create(post));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Post post){
+    public ResponseEntity<PostDto> update(@PathVariable Long id, @RequestBody Post post){
         PostDto updatedPost = postService.getOne(id);
         if(updatedPost == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "Post not found");
-            return ResponseEntity.status(404).body(error);
+            throw new PostNotFoundException(id);
         }
         User user = userService.getOne(post.getUser().getId());
         if(user == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "User not found");
-            return ResponseEntity.status(404).body(error);
+            throw new UserNotFoundException(post.getUser().getId());
         }
         post.setUser(user);
         return ResponseEntity.ok(postService.update(id, post));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<PostDto> delete(@PathVariable Long id){
         PostDto post = postService.getOne(id);
         if(post == null){
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "Post not found");
-            return ResponseEntity.status(404).body(error);
+            throw new PostNotFoundException(id);
         }
         postService.delete(id);
         return ResponseEntity.status(204).build();

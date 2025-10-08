@@ -13,14 +13,16 @@ public class PostDto {
     private Long id;
     private String title;
     private String content;
-    private String user;
+    private Long userId;
+    private String userName;
     private Category category;
 
     public PostDto(Post post){
         this.id = post.getId();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.user = post.getUser().getName();
+        this.userId = post.getUser().getId();
+        this.userName = post.getUser().getName();
         this.category = post.getCategory();
     }
 
