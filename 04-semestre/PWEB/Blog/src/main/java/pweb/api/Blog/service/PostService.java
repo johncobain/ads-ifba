@@ -25,6 +25,10 @@ public class PostService {
         return post != null ? new PostDto(post) : null;
     }
 
+    public List<PostDto> getByTitle(String title) {
+        return PostDto.convert(postRepository.findByTitleContainingIgnoreCase(title));
+    }
+
     public PostDto create(Post post) {
         return new PostDto(postRepository.save(post));
     }

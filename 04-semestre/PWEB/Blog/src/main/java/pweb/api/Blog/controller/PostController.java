@@ -40,6 +40,11 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<PostDto>> getByTitle(@RequestParam String title){
+        return ResponseEntity.ok(postService.getByTitle(title));
+    }
+
     @PostMapping
     public ResponseEntity<PostDto> create(@RequestBody Post post){
         User user = userService.getOne(post.getUser().getId());
