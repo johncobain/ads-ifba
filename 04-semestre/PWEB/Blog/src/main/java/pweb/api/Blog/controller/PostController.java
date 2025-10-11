@@ -1,5 +1,6 @@
 package pweb.api.Blog.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pweb.api.Blog.dto.PostDto;
@@ -46,7 +47,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDto> create(@RequestBody Post post){
+    public ResponseEntity<PostDto> create(@RequestBody @Valid Post post){
         User user = userService.getOne(post.getUser().getId());
         if(user == null){
             throw new UserNotFoundException(post.getUser().getId());
@@ -56,7 +57,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> update(@PathVariable Long id, @RequestBody Post post){
+    public ResponseEntity<PostDto> update(@PathVariable Long id, @RequestBody @Valid Post post){
         PostDto updatedPost = postService.getOne(id);
         if(updatedPost == null){
             throw new PostNotFoundException(id);

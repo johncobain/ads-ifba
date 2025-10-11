@@ -1,5 +1,6 @@
 package pweb.api.Blog.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pweb.api.Blog.exception.UserNotFoundException;
@@ -32,12 +33,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user){
+    public ResponseEntity<User> create(@RequestBody @Valid User user){
         return ResponseEntity.ok(userService.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody @Valid User user){
         User updatedUser = userService.getOne(id);
         if(updatedUser == null){
             throw new UserNotFoundException(id);

@@ -1,5 +1,6 @@
 package pweb.api.Blog.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.repository.UserRepository;
@@ -26,6 +27,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
     public User update(Long id, User updatedUser) {
         User user = getOne(id);
         if(user == null) {
@@ -37,6 +39,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
     public void delete(Long id) {
         userRepository.deleteById(id);
     }

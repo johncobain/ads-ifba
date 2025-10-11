@@ -1,5 +1,6 @@
 package pweb.api.Blog.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pweb.api.Blog.dto.PostDto;
 import pweb.api.Blog.model.Post;
@@ -33,6 +34,7 @@ public class PostService {
         return new PostDto(postRepository.save(post));
     }
 
+    @Transactional
     public PostDto update(Long id, Post updatedPost) {
         Post post = postRepository.findById(id).orElse(null);
         if(post == null) {
@@ -45,6 +47,7 @@ public class PostService {
         return new PostDto(postRepository.save(post));
     }
 
+    @Transactional
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
