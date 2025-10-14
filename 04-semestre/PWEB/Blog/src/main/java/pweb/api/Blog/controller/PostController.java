@@ -12,6 +12,8 @@ import pweb.api.Blog.model.User;
 import pweb.api.Blog.service.PostService;
 import pweb.api.Blog.service.UserService;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,14 +50,19 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDto> create(@RequestBody @Valid Post post){
+    public ResponseEntity<PostDto> create(@RequestBody @Valid Post post) throws URISyntaxException {
         UserDto user = userService.getOne(post.getUser().getId());
         if(user == null) {
             throw new UserNotFoundException(post.getUser().getId());
         }
         post.getUser().setName(user.getName());
         post.getUser().setLogin(user.getLogin());
-        return ResponseEntity.ok(postService.create(post));
+
+        PostDto createdPost = postService.create(post);
+        URI location = new URI("/posts/" + createdPost.getId());
+
+
+        return ResponseEntity.created(location).body(createdPost);
     }
 
     @PutMapping("/{id}")

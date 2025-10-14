@@ -8,6 +8,8 @@ import pweb.api.Blog.exception.UserNotFoundException;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.service.UserService;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -34,8 +36,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody @Valid User user){
-        return ResponseEntity.ok(userService.save(user));
+    public ResponseEntity<UserDto> create(@RequestBody @Valid User user) throws URISyntaxException {
+        UserDto createdUser = userService.save(user);
+        URI location = new URI("/users/" + createdUser.getId());
+        return ResponseEntity.created(location).body(createdUser);
     }
 
     @PutMapping("/{id}")
