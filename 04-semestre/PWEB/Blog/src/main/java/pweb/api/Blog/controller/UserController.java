@@ -3,6 +3,7 @@ package pweb.api.Blog.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pweb.api.Blog.dto.UserDto;
 import pweb.api.Blog.exception.UserNotFoundException;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.service.UserService;
@@ -19,13 +20,13 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll(){
+    public ResponseEntity<List<UserDto>> getAll(){
         return ResponseEntity.ok(userService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getOne(@PathVariable Long id){
-        User user = userService.getOne(id);
+    public ResponseEntity<UserDto> getOne(@PathVariable Long id){
+        UserDto user = userService.getOne(id);
         if(user == null){
             throw new UserNotFoundException(id);
         }
@@ -33,13 +34,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody @Valid User user){
+    public ResponseEntity<UserDto> create(@RequestBody @Valid User user){
         return ResponseEntity.ok(userService.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody @Valid User user){
-        User updatedUser = userService.getOne(id);
+    public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid User user){
+        UserDto updatedUser = userService.getOne(id);
         if(updatedUser == null){
             throw new UserNotFoundException(id);
         }
@@ -47,8 +48,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
-        User user = userService.getOne(id);
+    public ResponseEntity<UserDto> delete(@PathVariable Long id){
+        UserDto user = userService.getOne(id);
         if(user == null){
             throw new UserNotFoundException(id);
         }

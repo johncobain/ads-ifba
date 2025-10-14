@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pweb.api.Blog.dto.PostDto;
+import pweb.api.Blog.dto.UserDto;
 import pweb.api.Blog.exception.PostNotFoundException;
 import pweb.api.Blog.exception.UserNotFoundException;
 import pweb.api.Blog.model.Post;
@@ -48,11 +49,12 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<PostDto> create(@RequestBody @Valid Post post){
-        User user = userService.getOne(post.getUser().getId());
-        if(user == null){
+        UserDto user = userService.getOne(post.getUser().getId());
+        if(user == null) {
             throw new UserNotFoundException(post.getUser().getId());
         }
-        post.setUser(user);
+        post.getUser().setName(user.getName());
+        post.getUser().setLogin(user.getLogin());
         return ResponseEntity.ok(postService.create(post));
     }
 
@@ -62,11 +64,12 @@ public class PostController {
         if(updatedPost == null){
             throw new PostNotFoundException(id);
         }
-        User user = userService.getOne(post.getUser().getId());
+        UserDto user = userService.getOne(post.getUser().getId());
         if(user == null){
             throw new UserNotFoundException(post.getUser().getId());
         }
-        post.setUser(user);
+        post.getUser().setName(user.getName());
+        post.getUser().setLogin(user.getLogin());
         return ResponseEntity.ok(postService.update(id, post));
     }
 

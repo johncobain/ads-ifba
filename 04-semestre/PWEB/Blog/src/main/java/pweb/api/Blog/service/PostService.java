@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pweb.api.Blog.dto.PostDto;
 import pweb.api.Blog.model.Post;
+import pweb.api.Blog.model.User;
 import pweb.api.Blog.repository.PostRepository;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class PostService {
 
     public PostDto getOne(Long id) {
         Post post = postRepository.findById(id).orElse(null);
-        return post != null ? new PostDto(post) : null;
+        return post != null ? PostDto.fromPost(post) : null;
     }
 
     public List<PostDto> getByTitle(String title) {
@@ -31,7 +32,7 @@ public class PostService {
     }
 
     public PostDto create(Post post) {
-        return new PostDto(postRepository.save(post));
+        return PostDto.fromPost(postRepository.save(post));
     }
 
     @Transactional
@@ -44,7 +45,7 @@ public class PostService {
         post.setContent(updatedPost.getContent());
         post.setCategory(updatedPost.getCategory());
         post.setUser(updatedPost.getUser());
-        return new PostDto(postRepository.save(post));
+        return PostDto.fromPost(postRepository.save(post));
     }
 
     @Transactional
