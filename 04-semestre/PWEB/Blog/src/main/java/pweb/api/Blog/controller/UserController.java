@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody @Valid UserFormDto user) throws URISyntaxException {
+    public ResponseEntity<UserDto> create(@RequestBody @Valid UserFormDto user) {
         return ResponseEntity.status(201).body(userService.save(user));
     }
 

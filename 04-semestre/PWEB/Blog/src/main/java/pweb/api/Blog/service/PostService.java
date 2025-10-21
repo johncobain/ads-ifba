@@ -3,6 +3,7 @@ package pweb.api.Blog.service;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pweb.api.Blog.dto.PostDto;
+import pweb.api.Blog.dto.PostFormDto;
 import pweb.api.Blog.model.Post;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.repository.PostRepository;
@@ -31,20 +32,21 @@ public class PostService {
         return PostDto.convert(postRepository.findByTitleContainingIgnoreCase(title));
     }
 
-    public PostDto create(Post post) {
-        return PostDto.fromPost(postRepository.save(post));
+    @Transactional
+    public PostDto save(PostFormDto post) {
+        return PostDto.fromPost(postRepository.save(new Post(post)));
     }
 
     @Transactional
-    public PostDto update(Long id, Post updatedPost) {
+    public PostDto update(Long id, PostFormDto updatedPost) {
         Post post = postRepository.findById(id).orElse(null);
         if(post == null) {
             return null;
         }
-        post.setTitle(updatedPost.getTitle());
-        post.setContent(updatedPost.getContent());
-        post.setCategory(updatedPost.getCategory());
-        post.setUser(updatedPost.getUser());
+        post.setTitle(updatedPost.title());
+        post.setContent(updatedPost.content());
+        post.setCategory(updatedPost.category());
+        post.setUser(updatedPost.user());
         return PostDto.fromPost(postRepository.save(post));
     }
 

@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pweb.api.Blog.dto.PostDto;
+import pweb.api.Blog.dto.PostFormDto;
 import pweb.api.Blog.dto.UserDto;
 import pweb.api.Blog.exception.PostNotFoundException;
 import pweb.api.Blog.exception.UserNotFoundException;
@@ -47,33 +48,29 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDto> create(@RequestBody @Valid Post post) throws URISyntaxException {
-        UserDto user = userService.getOne(post.getUser().getId());
+    public ResponseEntity<PostDto> create(@RequestBody @Valid PostFormDto post) {
+        UserDto user = userService.getOne(post.user().getId());
         if(user == null) {
-            throw new UserNotFoundException(post.getUser().getId());
+            throw new UserNotFoundException(post.user().getId());
         }
-        post.getUser().setName(user.name());
-        post.getUser().setLogin(user.login());
+        post.user().setName(user.name());
+        post.user().setLogin(user.login());
 
-        PostDto createdPost = postService.create(post);
-        URI location = new URI("/posts/" + createdPost.getId());
-
-
-        return ResponseEntity.created(location).body(createdPost);
+        return ResponseEntity.status(201).body(postService.save(post));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> update(@PathVariable Long id, @RequestBody @Valid Post post){
+    public ResponseEntity<PostDto> update(@PathVariable Long id, @RequestBody @Valid PostFormDto post){
         PostDto updatedPost = postService.getOne(id);
         if(updatedPost == null){
             throw new PostNotFoundException(id);
         }
-        UserDto user = userService.getOne(post.getUser().getId());
+        UserDto user = userService.getOne(post.user().getId());
         if(user == null){
-            throw new UserNotFoundException(post.getUser().getId());
+            throw new UserNotFoundException(post.user().getId());
         }
-        post.getUser().setName(user.name());
-        post.getUser().setLogin(user.login());
+        post.user().setName(user.name());
+        post.user().setLogin(user.login());
         return ResponseEntity.ok(postService.update(id, post));
     }
 

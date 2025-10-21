@@ -6,20 +6,16 @@ import pweb.api.Blog.model.Post;
 
 import java.util.List;
 
-@Data
-public class PostDto {
-    private Long id;
-    private String title;
-    private String content;
-    private UserDto user;
-    private Category category;
+public record PostDto(
+        Long id,
+        String title,
+        String content,
+        UserDto user,
+        Category category
+) {
 
     public PostDto(Post post){
-        this.id = post.getId();
-        this.title = post.getTitle();
-        this.content = post.getContent();
-        this.user = UserDto.fromUser(post.getUser());
-        this.category = post.getCategory();
+        this(post.getId(), post.getTitle(), post.getContent(), UserDto.fromUser(post.getUser()), post.getCategory());
     }
 
     public static PostDto fromPost(Post post){
