@@ -3,6 +3,7 @@ package pweb.api.Blog.service;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pweb.api.Blog.dto.UserDto;
+import pweb.api.Blog.dto.UserFormDto;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.repository.UserRepository;
 
@@ -25,19 +26,20 @@ public class UserService {
         return user != null ? UserDto.fromUser(user) : null;
     }
 
-    public UserDto save(User user) {
-        return UserDto.fromUser(userRepository.save(user));
+    @Transactional
+    public UserDto save(UserFormDto user) {
+        return UserDto.fromUser(userRepository.save(new User(user)));
     }
 
     @Transactional
-    public UserDto update(Long id, User updatedUser) {
+    public UserDto update(Long id, UserFormDto updatedUser) {
         User user = userRepository.findById(id).orElse(null);
         if(user == null) {
             return null;
         }
-        user.setName(updatedUser.getName());
-        user.setLogin(updatedUser.getLogin());
-        user.setPassword(updatedUser.getPassword());
+        user.setName(updatedUser.name());
+        user.setLogin(updatedUser.login());
+        user.setPassword(updatedUser.password());
         return UserDto.fromUser(userRepository.save(user));
     }
 

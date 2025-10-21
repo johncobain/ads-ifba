@@ -5,20 +5,17 @@ import pweb.api.Blog.model.User;
 
 import java.util.List;
 
-@Data
-public class UserDto {
-    private Long id;
-    private String name;
-    private String login;
-
+public record UserDto (
+        Long id,
+        String name,
+        String login
+){
     public UserDto(User user){
-        this.id = user.getId();
-        this.name = user.getName();
-        this.login = user.getLogin();
+        this(user.getId(), user.getName(), user.getLogin());
     }
 
     public static UserDto fromUser(User user){
-        return new UserDto(user);
+        return new UserDto(user.getId(), user.getName(), user.getLogin());
     }
 
     public static List<UserDto> convert(List<User> users){

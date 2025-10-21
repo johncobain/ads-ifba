@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pweb.api.Blog.dto.UserDto;
+import pweb.api.Blog.dto.UserFormDto;
 import pweb.api.Blog.exception.UserNotFoundException;
 import pweb.api.Blog.model.User;
 import pweb.api.Blog.service.UserService;
@@ -36,14 +37,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody @Valid User user) throws URISyntaxException {
-        UserDto createdUser = userService.save(user);
-        URI location = new URI("/users/" + createdUser.getId());
-        return ResponseEntity.created(location).body(createdUser);
+    public ResponseEntity<UserDto> create(@RequestBody @Valid UserFormDto user) throws URISyntaxException {
+        return ResponseEntity.status(201).body(userService.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid User user){
+    public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserFormDto user){
         UserDto updatedUser = userService.getOne(id);
         if(updatedUser == null){
             throw new UserNotFoundException(id);

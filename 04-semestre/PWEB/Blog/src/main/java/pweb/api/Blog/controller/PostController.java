@@ -8,15 +8,12 @@ import pweb.api.Blog.dto.UserDto;
 import pweb.api.Blog.exception.PostNotFoundException;
 import pweb.api.Blog.exception.UserNotFoundException;
 import pweb.api.Blog.model.Post;
-import pweb.api.Blog.model.User;
 import pweb.api.Blog.service.PostService;
 import pweb.api.Blog.service.UserService;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/posts")
@@ -55,8 +52,8 @@ public class PostController {
         if(user == null) {
             throw new UserNotFoundException(post.getUser().getId());
         }
-        post.getUser().setName(user.getName());
-        post.getUser().setLogin(user.getLogin());
+        post.getUser().setName(user.name());
+        post.getUser().setLogin(user.login());
 
         PostDto createdPost = postService.create(post);
         URI location = new URI("/posts/" + createdPost.getId());
@@ -75,8 +72,8 @@ public class PostController {
         if(user == null){
             throw new UserNotFoundException(post.getUser().getId());
         }
-        post.getUser().setName(user.getName());
-        post.getUser().setLogin(user.getLogin());
+        post.getUser().setName(user.name());
+        post.getUser().setLogin(user.login());
         return ResponseEntity.ok(postService.update(id, post));
     }
 
