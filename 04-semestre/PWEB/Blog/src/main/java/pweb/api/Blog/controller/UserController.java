@@ -1,5 +1,7 @@
 package pweb.api.Blog.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +41,8 @@ public class UserController {
     }
 
     @PostMapping
+    @Operation(summary = "Create a new User")
+    @ApiResponse(responseCode = "201", description="User created successfully")
     public ResponseEntity<UserDto> create(@RequestBody @Valid UserFormDto user) {
         return ResponseEntity.status(201).body(userService.save(user));
     }
