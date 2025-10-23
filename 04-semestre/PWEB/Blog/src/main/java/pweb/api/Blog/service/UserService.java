@@ -1,6 +1,8 @@
 package pweb.api.Blog.service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pweb.api.Blog.dto.UserDto;
 import pweb.api.Blog.dto.UserFormDto;
@@ -17,34 +19,34 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserDto> getAll() {
-        return UserDto.convert(userRepository.findAll());
+    public Page<UserDto> getAll(Pageable pageable) {
+        return this.userRepository.findAll(pageable).map(UserDto::new);
     }
 
     public UserDto getOne(Long id) {
-        User user = userRepository.findById(id).orElse(null);
+        User user = this.userRepository.findById(id).orElse(null);
         return user != null ? UserDto.fromUser(user) : null;
     }
 
     @Transactional
     public UserDto save(UserFormDto user) {
-        return UserDto.fromUser(userRepository.save(new User(user)));
+        return UserDto.fromUser(this.userRepository.save(new User(user)));
     }
 
     @Transactional
     public UserDto update(Long id, UserFormDto updatedUser) {
-        User user = userRepository.findById(id).orElse(null);
+        User user = this.userRepository.findById(id).orElse(null);
         if(user == null) {
             return null;
         }
         user.setName(updatedUser.name());
         user.setLogin(updatedUser.login());
         user.setPassword(updatedUser.password());
-        return UserDto.fromUser(userRepository.save(user));
+        return UserDto.fromUser(this.userRepository.save(user));
     }
 
     @Transactional
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        this.userRepository.deleteById(id);
     }
 }

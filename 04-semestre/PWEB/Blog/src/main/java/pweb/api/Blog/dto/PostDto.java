@@ -21,8 +21,4 @@ public record PostDto(
     public static PostDto fromPost(Post post){
         return new PostDto(post);
     }
-
-    public static List<PostDto> convert(List<Post> posts){
-        return posts.stream().map(PostDto::new).toList();
-    }
 }

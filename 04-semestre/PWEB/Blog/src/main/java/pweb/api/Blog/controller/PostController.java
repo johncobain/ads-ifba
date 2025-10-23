@@ -1,6 +1,8 @@
 package pweb.api.Blog.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pweb.api.Blog.dto.PostDto;
@@ -8,13 +10,8 @@ import pweb.api.Blog.dto.PostFormDto;
 import pweb.api.Blog.dto.UserDto;
 import pweb.api.Blog.exception.PostNotFoundException;
 import pweb.api.Blog.exception.UserNotFoundException;
-import pweb.api.Blog.model.Post;
 import pweb.api.Blog.service.PostService;
 import pweb.api.Blog.service.UserService;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
@@ -29,8 +26,8 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PostDto>> getAll(){
-        return ResponseEntity.ok(postService.getAll());
+    public ResponseEntity<Page<PostDto>> getAll(Pageable pageable){
+        return ResponseEntity.ok(postService.getAll(pageable));
     }
 
     @GetMapping("/{id}")
@@ -43,8 +40,8 @@ public class PostController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PostDto>> getByTitle(@RequestParam String title){
-        return ResponseEntity.ok(postService.getByTitle(title));
+    public ResponseEntity<Page<PostDto>> getByTitle(Pageable pageable, @RequestParam String title){
+        return ResponseEntity.ok(postService.getByTitle(pageable, title));
     }
 
     @PostMapping

@@ -17,8 +17,4 @@ public record UserDto (
     public static UserDto fromUser(User user){
         return new UserDto(user);
     }
-
-    public static List<UserDto> convert(List<User> users){
-        return users.stream().map(UserDto::new).toList();
-    }
 }
