@@ -1,0 +1,9 @@
+Sugestões de Jogos:
+
+Jogo aritmético - O computador sorteia operações e números aleatórios para o usuário acertar.
+
+Adventure em Texto: O usuário digite comandos como NORTE, SUL, LESTE, OESTE, ABRIR, ATIRAR, PEGAR, para navegar em um mundo sem interface gráfica, apenas texto e muita imaginação.
+
+Jogo do Milhão - O servidor sorteia perguntas com 5 opções e envia para o usuário acertar. Cada acerto faz ele avançar até 1 milhão de reais.
+
+Jogo da Velha - O servidor manda o tabuleiro e o cliente diz onde quer colocar o X, o servidor coloca o "O" aleatoriamente ou seguindo uma lógica.
