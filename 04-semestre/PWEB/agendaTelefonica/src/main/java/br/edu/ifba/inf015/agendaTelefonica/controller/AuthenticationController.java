@@ -39,10 +39,4 @@ public class AuthenticationController {
     public ResponseEntity<UsuarioDto> register(@Valid @RequestBody UsuarioFormDto userForm) {
         return ResponseEntity.ok(usuarioService.register(userForm));
     }
-
-    @GetMapping("/test")
-    public ResponseEntity<String> test(){
-        return ResponseEntity.ok("Test");
-    }
-
 }
