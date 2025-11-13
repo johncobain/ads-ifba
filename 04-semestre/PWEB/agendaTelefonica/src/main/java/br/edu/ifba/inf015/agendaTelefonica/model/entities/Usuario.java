@@ -27,12 +27,15 @@ public class Usuario implements UserDetails {
     private final List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contato> contatos;
+    private final List<Contato> contatos;
 
-    public Usuario(){}
+    public Usuario(){
+        this.contatos = new ArrayList<>();
+    }
     public Usuario(UsuarioFormDto usuarioForm){
         this.username = usuarioForm.username();
         this.password = usuarioForm.password();
+        this.contatos = new ArrayList<>();
     }
 
     @Override

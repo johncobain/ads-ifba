@@ -9,6 +9,8 @@ import br.edu.ifba.inf015.agendaTelefonica.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
@@ -24,8 +26,10 @@ public class UsuarioService {
     public UsuarioDto register(UsuarioFormDto usuarioForm){
         Usuario usuario = new Usuario(usuarioForm);
         usuario.setPassword(passwordEncoder.encode(usuarioForm.password()));
-        Role defaultRole = roleRepository.findByRole("ROLE_USER")
-                .orElseThrow(() -> new RuntimeException("Papel não encontrado"));
+        Role defaultRole = roleRepository.findByRole("ROLE_USER").orElse(null);
+        if(defaultRole == null){
+            defaultRole = roleRepository.save(new Role("ROLE_USER"));
+        }
         usuario.setRole(defaultRole);
         return UsuarioDto.fromEntity(usuarioRepository.save(usuario));
     }
