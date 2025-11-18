@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import br.edu.ifba.inf015.agendaTelefonica.service.ContatoService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/contatos")
 public class ContatoController {
@@ -30,10 +32,8 @@ public class ContatoController {
   }
 
   @GetMapping
-  public ResponseEntity<Page<ContatoDto>> findAll(
-          Pageable pageable,
-          @AuthenticationPrincipal Usuario usuario) {
-    return ResponseEntity.ok(contatoService.findAllFromUser(pageable, usuario));
+  public ResponseEntity<List<ContatoDto>> findAll(@AuthenticationPrincipal Usuario usuario) {
+    return ResponseEntity.ok(contatoService.findAllFromUser(usuario));
   }
 
   @GetMapping("/{contatoId}")

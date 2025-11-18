@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ContatoService {
   private final ContatoRepository contatoRepository;
@@ -36,8 +38,8 @@ public class ContatoService {
     return ContatoDto.fromEntity(contatoRepository.save(contato));
   }
 
-  public Page<ContatoDto> findAllFromUser(Pageable pageable, Usuario usuario){
-    return contatoRepository.findAllByUsuarioId(pageable, usuario.getId()).map(ContatoDto::fromEntity);
+  public List<ContatoDto> findAllFromUser(Usuario usuario){
+    return contatoRepository.findAllByUsuarioId(usuario.getId()).stream().map(ContatoDto::fromEntity).toList();
   }
 
   public ContatoDto findById(Long contatoId, Usuario usuario){
