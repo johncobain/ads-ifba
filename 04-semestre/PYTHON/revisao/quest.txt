@@ -1,0 +1,19 @@
+1) Escreva um programa que leia dois números e que pergunte qual operação você deseja realizar. Você deve poder calcular soma (+), subtração (-), multiplicação (*) e divisão (/). Exiba o resultado da operação solicitada
+
+2)Escreva um programa para aprovar o empréstimo bancário para compra de uma casa. O programa deve perguntar o valor da casa a comprar, o salário e a quantidade de anos a pagar. O valor da prestação mensal não pode ser superior a 30% do salário. Calcule o valor da prestação como sendo o valor da casa a comprar dividido pelo número de meses a pagar.
+
+3)Escreva um programa que pergunte a velocidade do carro de um usuário. Caso ultrapasse 80 km/h, exiba uma mensagem dizendo que o usuário foi multado. Nesse caso, exiba o valor da multa, cobrando R$ 5 por km acima de 80 km/h.
+
+4) Escreva um programa que pergunte o valor inicial de uma dívida e o juro mensal. Pergunte também o valor mensal que será pago. Imprima o número de meses para que a dívida seja paga, o total pago e o total de juros pago.
+
+5) Determine se um determinado ano lido e bissexto. Sendo que um ano ´ e bissexto se ´ for divisıvel por 400 ou se for divisıvel por 4 e nao for divisıvel por 100. Por exemplo: 1988, 1992, 1996
+
+6) Uma empresa vende o mesmo produto para quatro diferentes estados. Cada estado possui uma taxa diferente de imposto sobre o produto (MG 7%; SP 12%; RJ 15%; MS 8%). Fac¸a um programa em que o usuario entre com o valor e o estado destino do ´ produto e o programa retorne o prec¸o final do produto acrescido do imposto do estado em que ele sera vendido. Se o estado digitado n ´ ao for v ˜ alido, mostrar uma mensagem ´ de erro.
+
+7) Faça um Programa que leia 20 números inteiros e armazene-os num vetor. Armazene os números pares no vetor PAR e os números IMPARES no vetor impar. Imprima os três vetores.
+
+8)Faça um programa que leia 2 strings e informe o conteúdo delas seguido do seu comprimento. Informe também se as duas strings possuem o mesmo comprimento e são iguais ou diferentes no conteúdo.
+
+9) Desenvolva um jogo da forca. O programa terá uma palavra. O jogador poderá errar 3 vezes antes de ser enforcado.
+
+10) Crie um programa que cadastre informações de várias pessoas (nome, idade e cpf) e depois coloque em um dicionário. Depois remova todas as pessoas menores de 18 anos do dicionário e coloque em outro dicionário.
