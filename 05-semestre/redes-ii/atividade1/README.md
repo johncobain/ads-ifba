@@ -19,6 +19,7 @@ As outras duas máquinas terão uma interface de rede conectada apenas a rede in
 ## Acesso ao Roteador por SSH
 
 Login: root
+
 Pass: thoughtpolice
 
 ssh: ssh -p 3022 root@localhost
