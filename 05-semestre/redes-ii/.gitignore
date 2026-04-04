@@ -1,1 +1,5 @@
 vms/
+venv/
+__pycache__/
+
+*.pdf
