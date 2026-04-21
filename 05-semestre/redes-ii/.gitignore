@@ -1,5 +1,8 @@
 vms/
 venv/
+.venv/
 __pycache__/
+
+.env
 
 *.pdf
