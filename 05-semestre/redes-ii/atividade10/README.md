@@ -6,7 +6,9 @@ O objetivo desta atividade é criar uma arquitetura de microsserviços escaláve
 
 ## Link para o Vídeo de Demonstração
 
-[Link para o Vídeo de Demonstração](https://youtu.be/seu-video-id)
+[Link para o Vídeo de Demonstração](https://youtu.be/V6xblqKct6w)
+
+[Link para o Diretório do Projeto no GitHub](https://github.com/johncobain/ads-ifba/tree/7f6ad75ebdc18a4a1fe69cf2b24c9d6801a41b2c/05-semestre/redes-ii/atividade10/escalabilidade)
 
 ## Estrutura do Projeto
 
