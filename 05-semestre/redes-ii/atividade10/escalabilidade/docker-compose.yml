@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  consul:
+    image: consul:1.15
+    ports:
+      - "8500:8500"
+    command: "agent -dev -client=0.0.0.0"
+
+  users-service:
+    build: ./users-service
+    ports: ["3001:3000"]
+    depends_on: [rabbitmq]
+    environment:
+      - SERVICE_NAME=users-service
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+
+  products-service:
+    build: ./products-service
+    ports: ["3002:3000"]
+    depends_on: [rabbitmq]
+    environment:
+      - SERVICE_NAME=products-service
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+
+  orders-service:
+    build: ./orders-service
+    ports: ["3003:3000"]
+    depends_on: [rabbitmq]
+    environment:
+      - SERVICE_NAME=orders-service
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports: ["9090:9090"]

@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 5s
+scrape_configs:
+  - job_name: 'microservices'
+    static_configs:
+      - targets: ['users-service:3000', 'products-service:3000', 'orders-service:3000']
+
