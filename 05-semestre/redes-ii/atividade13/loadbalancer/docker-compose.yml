@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  # O Cache
+  cache:
+    image: redis:alpine
+
+  # As Instâncias da Aplicação
+  app1:
+    build: ./app
+    environment:
+      - APP_NAME=instancia-01
+  app2:
+    build: ./app
+    environment:
+      - APP_NAME=instancia-02
+  app3:
+    build: ./app
+    environment:
+      - APP_NAME=instancia-03
+
+  # O Balanceador de Carga
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - app1
+      - app2
+      - app3
+
+  # Serviço de Teste de Carga (executado sob demanda)
+  k6:
+    image: loadimpact/k6
+    volumes:
+      - ./teste_carga.js:/teste_carga.js
+    entrypoint: ["k6", "run", "/teste_carga.js"]
+    depends_on:
+      - nginx
