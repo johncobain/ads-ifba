@@ -1,2 +1,2 @@
 # ads-ifba
-repositório de projetos e exercícios dos cursos de ADS do IFBA
+repositório de projetos e exercícios dos cursos de ADS do IFBA.
